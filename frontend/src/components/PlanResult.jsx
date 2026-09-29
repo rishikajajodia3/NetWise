@@ -1,3 +1,4 @@
+import NetworkTopology from './NetworkTopology.jsx';
 import { Alert, Card } from './ui.jsx';
 
 function Stat({ label, value }) {
@@ -69,6 +70,7 @@ export default function PlanResult({ plan }) {
           <p className="mt-3 text-xs text-slate-500">
             The gateway is the first usable IP of each subnet. Configure it on the router subinterface for that VLAN.
           </p>
+          <NetworkTopology plan={plan} />
         </>
       ) : (
         <>
