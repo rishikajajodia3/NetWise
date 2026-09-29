@@ -280,14 +280,3 @@ No database is used. Network plans are calculated on demand and troubleshooting 
 
 ---
 
-## 👥 Team / Contributors
-
-| Name | Role | GitHub |
-|------|------|--------|
-| _Member 1_ | _Role_ | [@username](https://github.com/username) |
-| _Member 2_ | _Role_ | [@username](https://github.com/username) |
-| _Member 3_ | _Role_ | [@username](https://github.com/username) |
-
-**Guide / Mentor:** _Name_
-
-**Institution:** _College Name_
