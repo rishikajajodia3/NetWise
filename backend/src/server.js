@@ -1,4 +1,4 @@
-import { pathToFileURL } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import cors from 'cors';
 import express from 'express';
 import { PlanValidationError } from './planner/planBuilder.js';
@@ -28,6 +28,12 @@ app.get('/api/health', (req, res) => {
 });
 app.use('/api/plan', plannerRoutes);
 app.use('/api/troubleshooting', troubleshootingRoutes);
+
+// In production the built React app (frontend/dist) is served from the same
+// origin as the API. The frontend uses hash routing, so no fallback is needed.
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(fileURLToPath(new URL('../../frontend/dist', import.meta.url))));
+}
 
 app.use((req, res) => {
   res.status(404).json({ error: `Route not found: ${req.method} ${req.path}` });

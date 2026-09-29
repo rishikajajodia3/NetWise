@@ -1,6 +1,8 @@
 // All calls to the NetWise backend go through this file.
 
-const API_BASE_URL = 'http://localhost:5000/api';
+// In development the backend runs separately on port 5000. In production
+// Express serves this app, so the API is on the same origin.
+const API_BASE_URL = import.meta.env.DEV ? 'http://localhost:5000/api' : '/api';
 
 /** Error with a message that is safe to show to the user. */
 export class ApiError extends Error {
@@ -22,7 +24,7 @@ async function request(path, { method = 'GET', body } = {}) {
     });
   } catch {
     throw new ApiError(
-      `Cannot reach the NetWise API. Make sure the backend is running on ${new URL(API_BASE_URL).origin} (cd backend, then npm start).`,
+      `Cannot reach the NetWise API. Make sure the backend is running on ${new URL(API_BASE_URL, window.location.href).origin} (cd backend, then npm start).`,
       { unavailable: true },
     );
   }
